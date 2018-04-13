@@ -22,12 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnShowDatabase;
 
-
     TextView tvProducts;
 
     Button btnSearchWithinDatabase;
 
-    Button btnLive;
    public static TextView tvliveResponse;
 
     @Override
@@ -41,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         btnShowDatabase = (Button) findViewById(R.id.show_database);
+
         edtUserCode=(EditText) findViewById(R.id.edt_code_for_the_query);
+//
         tvProducts = (TextView) findViewById(R.id.tv_display_products);
+
         btnSearchWithinDatabase = (Button) findViewById(R.id.btn_search_product);
         tvProductFound = (TextView) findViewById(R.id.tv_display_query_result);
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     String prodCode = prod.getCode();
                     String prodInfo = prod.getInfo();
                     String prodIngredients = prod.getIngredients_text();
+
                     info = info + "\n" + prodCode + " " + prodInfo + " " + prodIngredients;
 
                 }
@@ -73,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 Product product = myAppDatabase.productsDao().findProductByCode(stringUserInputCode);
 
                 if (product == null) {
-                    Toast.makeText(MainActivity.this, "No such product in the db, fetching data live", Toast.LENGTH_LONG).show();
-                    stringUserInputCode= edtUserCode.getText().toString();
+                   Toast.makeText(MainActivity.this, "No such product in the db, fetch live data", Toast.LENGTH_LONG).show();
+//                    stringUserInputCode= edtUserCode.getText().toString();
                     fetchData process= new fetchData();
                     process.execute();
 
