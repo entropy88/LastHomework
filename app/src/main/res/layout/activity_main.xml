@@ -11,23 +11,23 @@
     android:hint="enter product code"/>
 
 
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/edt_product_code"
-        android:hint="enter product code"/>
+    <!--<EditText-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/edt_product_code"-->
+        <!--android:hint="enter product code"/>-->
 
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/edt_product_name"
-        android:hint="enter product name"/>
+    <!--<EditText-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/edt_product_name"-->
+        <!--android:hint="enter product name"/>-->
 
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/edt_product_ingredients"
-        android:hint="enter product ingredients"/>
+    <!--<EditText-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/edt_product_ingredients"-->
+        <!--android:hint="enter product ingredients"/>-->
 
     <Button
         android:id="@+id/show_database"
@@ -41,35 +41,19 @@
     android:layout_height="wrap_content"
      android:id="@+id/tv_display_products"/>
 
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/edt_search_by_code"
-        android:hint="enter product code"/>
+
     <Button
         android:id="@+id/btn_search_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search product in the database!"
+        android:text="Search product"
         />
     <TextView
         android:layout_width="wrap_content"
      android:layout_height="wrap_content"
         android:id="@+id/tv_display_query_result"/>
 
-    <Button
-        android:id="@+id/btn_search_live"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search product live!"
-        />
-    <ScrollView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/tv_display_live_result"/>
-    </ScrollView>
+
+
+
 </LinearLayout>

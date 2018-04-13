@@ -16,21 +16,17 @@ public class MainActivity extends AppCompatActivity {
     public static MyAppDatabase myAppDatabase;
     public static EditText edtUserCode;
     public static String stringUserInputCode;
+    public static TextView tvProductFound;
   //Strings for the parsed json object values
 
 
     Button btnShowDatabase;
-    //    EditText edtId;
 
-    //the next 3 are temporary
-    EditText edtCode;
-    EditText edtName;
-    EditText edtIngredients;
 
     TextView tvProducts;
-    EditText edtSearchByCode;
+
     Button btnSearchWithinDatabase;
-    TextView tvProductFound;
+
     Button btnLive;
    public static TextView tvliveResponse;
 
@@ -45,34 +41,17 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         btnShowDatabase = (Button) findViewById(R.id.show_database);
-
         edtUserCode=(EditText) findViewById(R.id.edt_code_for_the_query);
-        edtCode = (EditText) findViewById(R.id.edt_product_code);
-        edtName = (EditText) findViewById(R.id.edt_product_name);
-        edtIngredients = (EditText) findViewById(R.id.edt_product_ingredients);
         tvProducts = (TextView) findViewById(R.id.tv_display_products);
-        edtSearchByCode = (EditText) findViewById(R.id.edt_search_by_code);
         btnSearchWithinDatabase = (Button) findViewById(R.id.btn_search_product);
         tvProductFound = (TextView) findViewById(R.id.tv_display_query_result);
-        btnLive=(Button)findViewById(R.id.btn_search_live);
-        tvliveResponse= (TextView) findViewById(R.id.tv_display_live_result) ;
+
+
 
         btnShowDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        //temporary text method to create products. the real deal happens in the fetchData
-                String code = edtCode.getText().toString();
-                String name = edtName.getText().toString();
-                String ingredients = edtIngredients.getText().toString();
 
-                Product product = new Product();
-
-                product.setCode(code);
-                product.setInfo(name);
-                product.setIngredients_text(ingredients);
-
-                myAppDatabase.productsDao().addProduct(product);
-                Toast.makeText(MainActivity.this, "product added", Toast.LENGTH_LONG).show();
                 List<Product> products = myAppDatabase.productsDao().getProducts();
                 String info = "";
                 for (Product prod : products) {
@@ -80,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                     String prodCode = prod.getCode();
                     String prodInfo = prod.getInfo();
                     String prodIngredients = prod.getIngredients_text();
-
                     info = info + "\n" + prodCode + " " + prodInfo + " " + prodIngredients;
 
                 }
@@ -91,11 +69,14 @@ public class MainActivity extends AppCompatActivity {
         btnSearchWithinDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String codeQuery = edtSearchByCode.getText().toString();
-                Product product = myAppDatabase.productsDao().findProductByCode(codeQuery);
+                stringUserInputCode= edtUserCode.getText().toString();
+                Product product = myAppDatabase.productsDao().findProductByCode(stringUserInputCode);
 
                 if (product == null) {
-                    Toast.makeText(MainActivity.this, "No such product in the db", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "No such product in the db, fetching data live", Toast.LENGTH_LONG).show();
+                    stringUserInputCode= edtUserCode.getText().toString();
+                    fetchData process= new fetchData();
+                    process.execute();
 
                 } else {
                     Toast.makeText(MainActivity.this, "query successful", Toast.LENGTH_LONG).show();
@@ -110,13 +91,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnLive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                stringUserInputCode= edtUserCode.getText().toString();
-                fetchData process= new fetchData();
-                process.execute();
-            }
-        });
+
     }
 }

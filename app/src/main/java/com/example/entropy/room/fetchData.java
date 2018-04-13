@@ -42,7 +42,7 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
                 productCode=jsonObject.getString("code");
                 //can't get jerarchy right for these two
                 productName=jsonObject.getString("product.generic_name_en");
-                productIngredients=jsonObject.getString("product:{ingredients_text_en}");
+                productIngredients=jsonObject.optString("ingredients_text");
 
 
 
@@ -72,6 +72,6 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
         MainActivity.myAppDatabase.productsDao().addProduct(product);
 
 
-        MainActivity.tvliveResponse.setText(this.productCode+" "+this.productName+" "+this.productIngredients);
+        MainActivity.tvProductFound.setText(this.productCode+" "+this.productName+" "+this.productIngredients);
     }
 }
