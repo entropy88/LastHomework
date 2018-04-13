@@ -1,6 +1,7 @@
 package com.example.entropy.room;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -34,15 +35,17 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
                 line=bufferedReader.readLine();
                 data=data+line;
             }
+
             JSONObject jsonObject=new JSONObject(data);
+
 
 //            JSONArray jsonArray= new JSONArray(data);
 //            for (int i = 0; i <jsonArray.length() ; i++) {
 //                JSONObject jsonObject=(JSONObject) jsonArray.get(i) ;
                 productCode=jsonObject.getString("code");
                 //can't get jerarchy right for these two
-                productName=jsonObject.getString("product.generic_name_en");
-                productIngredients=jsonObject.optString("ingredients_text");
+                productName=jsonObject.getString("product_name");
+                productIngredients=jsonObject.getString("ingredients_text");
 
 
 
