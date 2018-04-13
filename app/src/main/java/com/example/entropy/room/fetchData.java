@@ -23,8 +23,9 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            URL url= new URL ("https://world.openfoodfacts.org/api/v0/product/737628064502.json");
-            HttpURLConnection httpURLConnection= (HttpURLConnection) url.openConnection();
+           URL queryUrl= new URL ("https://world.openfoodfacts.org/api/v0/product/"+MainActivity.stringUserInputCode+".json");
+//            URL url= new URL ("https://world.openfoodfacts.org/api/v0/product/737628064502.json");
+            HttpURLConnection httpURLConnection= (HttpURLConnection) queryUrl.openConnection();
             InputStream inputStream =httpURLConnection.getInputStream();
             BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
 

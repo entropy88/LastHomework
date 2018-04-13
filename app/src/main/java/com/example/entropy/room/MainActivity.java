@@ -14,7 +14,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static MyAppDatabase myAppDatabase;
-
+    public static EditText edtUserCode;
+    public static String stringUserInputCode;
   //Strings for the parsed json object values
 
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnShowDatabase = (Button) findViewById(R.id.show_database);
 
+        edtUserCode=(EditText) findViewById(R.id.edt_code_for_the_query);
         edtCode = (EditText) findViewById(R.id.edt_product_code);
         edtName = (EditText) findViewById(R.id.edt_product_name);
         edtIngredients = (EditText) findViewById(R.id.edt_product_ingredients);
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         btnLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stringUserInputCode= edtUserCode.getText().toString();
                 fetchData process= new fetchData();
                 process.execute();
             }

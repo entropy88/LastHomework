@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    >
-    <!--<EditText-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:id="@+id/edt_product_id"-->
-    <!--android:hint="enter product id"/>-->
+    <EditText
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:id="@+id/edt_code_for_the_query"
+    android:hint="enter product code"/>
 
 
     <EditText
