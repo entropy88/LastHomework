@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 for (Product prod : products) {
 
                     String prodCode = prod.getCode();
-                    String prodInfo = prod.getInfo();
+                    String prodInfo = prod.getProduct_name();
                     String prodIngredients = prod.getIngredients_text();
 
                     info = info + "\n" + prodCode + " " + prodInfo + " " + prodIngredients;
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(MainActivity.this, "query successful", Toast.LENGTH_LONG).show();
                     String code = product.getCode();
-                    String info = product.getInfo();
+                    String info = product.getProduct_name();
                     String ingredients = product.getIngredients_text();
                     String foundWaldo = info + " " + ingredients;
 

@@ -13,17 +13,11 @@ public class Product {
     @PrimaryKey @NonNull @ColumnInfo(name = "product_code")
     private String code;
     @ColumnInfo(name = "product_info")
-    private String info;
+    private String product_name;
     @ColumnInfo(name = "product_ingredients")
     private String ingredients_text;
 
-//    public int getId() {
-//        return id;
-//    }
 
-//    public void setId(int id) {
-//        this.id = id;
-//    }
 
     public String getCode() {
         return code;
@@ -33,12 +27,12 @@ public class Product {
         this.code = code;
     }
 
-    public String getInfo() {
-        return info;
+    public String getProduct_name() {
+        return product_name;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setProduct_name(String info) {
+        this.product_name = product_name;
     }
 
     public String getIngredients_text() {
