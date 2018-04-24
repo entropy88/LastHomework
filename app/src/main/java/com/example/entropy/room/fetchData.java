@@ -23,11 +23,9 @@ import java.net.URL;
 
 public class fetchData extends AsyncTask<Void, Void, Void> {
     String data="";
-    String productCode="default";
-    String productName="default";
-    String productIngredients="default";
-    Product product = new Product();
-    Product productCopy= new Product();
+
+    String productValues;
+
     @Override
     protected Void doInBackground(Void... voids) {
         try {
@@ -46,8 +44,18 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
             }
 
 
-            Gson gson = new GsonBuilder().setLenient().create();
-            product=gson.fromJson(data,Product.class);
+//            Gson gson = new GsonBuilder().setLenient().create();
+//            product=gson.fromJson(data,Product.class);
+
+            JSONObject root= new JSONObject(data);
+            String code=root.getString("code");
+
+            JSONObject product= new JSONObject(root.getString("product"));
+
+            String productName= product.getString("product_name");
+            String ingredientsText= product.getString("ingredients_text_en");
+            productValues= code+ " "+ productName+" "+ingredientsText;
+
 
 
 
@@ -56,6 +64,8 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
             e.printStackTrace();
             MainActivity.tvliveResponse.setText("Try a different code");
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return null;
@@ -70,6 +80,6 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
 //        MainActivity.myAppDatabase.productsDao().addProduct(product);
 
 
-        MainActivity.tvProductFound.setText(product.getCode()+product.getProduct_name()+product.getIngredients_text());
+        MainActivity.tvProductFound.setText(productValues);
     }
 }
