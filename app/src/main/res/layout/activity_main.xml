@@ -14,8 +14,13 @@
         android:id="@+id/btn_search_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search product in the database!"
+        android:text="Search for product"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shows the string values parsed from the JSON response"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +37,10 @@
         android:layout_height="wrap_content"
         android:text="Show me all records!"
          />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shows all records from the database, but somehow I'm unable to set the product name properly"/>
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

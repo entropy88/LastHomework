@@ -22,42 +22,47 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class fetchData extends AsyncTask<Void, Void, Void> {
-    String data="";
 
+    String data = "";
+    String productCode= "def";
     String productValues;
+    String productName= "def";
+    String ingredientsText="def";
+
 
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-           URL queryUrl= new URL ("https://world.openfoodfacts.org/api/v0/product/"+MainActivity.stringUserInputCode+".json");
+            URL queryUrl = new URL("https://world.openfoodfacts.org/api/v0/product/" + MainActivity.stringUserInputCode + ".json");
 //            URL url= new URL ("https://world.openfoodfacts.org/api/v0/product/737628064502.json");
-            HttpURLConnection httpURLConnection= (HttpURLConnection) queryUrl.openConnection();
-            InputStream inputStream =httpURLConnection.getInputStream();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) queryUrl.openConnection();
+            InputStream inputStream = httpURLConnection.getInputStream();
 
 
-            BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-            String line="";
-            while (line!=null){
-                line=bufferedReader.readLine();
-                data=data+line;
+            String line = "";
+            while (line != null) {
+                line = bufferedReader.readLine();
+                data = data + line;
             }
 
 
 //            Gson gson = new GsonBuilder().setLenient().create();
 //            product=gson.fromJson(data,Product.class);
 
-            JSONObject root= new JSONObject(data);
-            String code=root.getString("code");
+            JSONObject root = new JSONObject(data);
+            productCode = root.getString("code");
 
-            JSONObject product= new JSONObject(root.getString("product"));
+            JSONObject jsonProduct = new JSONObject(root.getString("product"));
 
-            String productName= product.getString("product_name");
-            String ingredientsText= product.getString("ingredients_text_en");
-            productValues= code+ " "+ productName+" "+ingredientsText;
-
-
-
+            productName = jsonProduct.getString("product_name");
+            ingredientsText = jsonProduct.getString("ingredients_text_en");
+            Product product= new Product();
+            product.setCode(productCode);
+            product.setProduct_name(productName);
+            product.setIngredients_text(ingredientsText);
+            MainActivity.myAppDatabase.productsDao().addProduct(product);
 
 
         } catch (MalformedURLException e) {
@@ -75,11 +80,8 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void Void) {
         super.onPostExecute(Void);
-
-//
-//        MainActivity.myAppDatabase.productsDao().addProduct(product);
+        MainActivity.tvProductFound.setText(productCode+" "+productName+" "+ingredientsText);
 
 
-        MainActivity.tvProductFound.setText(productValues);
     }
 }
